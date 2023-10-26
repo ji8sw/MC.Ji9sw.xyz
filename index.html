@@ -25,9 +25,29 @@
             cursor: pointer;
         }
 
-        .Buttons:hover {
-            background-color: #303030;
+        .Home-Button {
+            background-color: #242424;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            left: 10px;
         }
+
+        @media (max-width: 768px) {
+            .Home-Button {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+            .Home-Button:hover {
+                background-color: #303030;
+            }
 
         .slider {
             -webkit-appearance: none;
@@ -48,7 +68,6 @@
             padding: 10px;
         }
 
-
             .slider::-webkit-slider-thumb {
                 -webkit-appearance: none;
                 appearance: none;
@@ -67,14 +86,80 @@
                 cursor: pointer;
             }
 
+        .sound-group {
+            display: flex;
+            flex-direction: column;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(450%);
+            width: 10%;
+            margin-bottom: 40px;
+        }
+
+        .category-title {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .sound-group select {
+            cursor: pointer;
+            background-color: #242424;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+            .sound-group select option {
+                background-color: #242424;
+                color: white;
+            }
     </style>
 </head>
 <body>
     <h1>Minecraft Sounds</h1>
-    <button id="StoneBreak" class="Buttons">Stone</button>
-    <button id="WoodBreak" class="Buttons">Wood</button>
-    <button id="SkeletonDeath" class="Buttons">Skeleton Death</button>
-    <button id="ZombieDeath" class="Buttons">Zombie Death</button>
+    <button class="Home-Button" onclick="window.location.href='https://ji9sw.xyz'"><</button>
+
+    <div class="sound-group">
+        <div class="category-title">Footsteps</div>
+        <select id="SoundCategoryWalk">
+            <option value="SnowWalk">Snow</option>
+            <option value="ScaffoldWalk">Scaffold</option>
+            <option value="GrassWalk">Grass</option>
+            <option value="SandWalk">Sand</option>
+            <option value="LadderClimb">Ladder</option>
+        </select>
+        <button id="PlayButtonWalk" class="Buttons">Play Sound</button>
+    </div>
+
+    <div class="sound-group">
+        <div class="category-title">Blocks</div>
+        <select id="SoundCategoryBlocks">
+            <option value="StoneBreak">Stone</option>
+            <option value="WoodBreak">Wood</option>
+        </select>
+        <button id="PlayButtonBlocks" class="Buttons">Play Sound</button>
+    </div>
+
+    <div class="sound-group">
+        <div class="category-title">Mobs</div>
+        <select id="SoundCategoryMobs">
+            <option value="SkeletonDeath">Skeleton Death</option>
+            <option value="ZombieDeath">Zombie Death</option>
+        </select>
+        <button id="PlayButtonMobs" class="Buttons">Play Sound</button>
+    </div>
+
+    <div class="sound-group">
+        <div class="category-title">Miscellaneous</div>
+        <select id="SoundCategoryMisc">
+            <option value="Portal">Portal</option>
+        </select>
+        <button id="PlayButtonMisc" class="Buttons">Play Sound</button>
+    </div>
 
     <div class="slidecontainer">
         <input type="range" min="0" max="100" value="50" class="slider" id="Volume">

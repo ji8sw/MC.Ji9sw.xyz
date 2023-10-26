@@ -1,34 +1,50 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var Volume = this.value / 100;
+    var AudioSources = [];
+
+    var Volume = document.querySelector('.slider').value / 100;
     document.querySelector('.slider').addEventListener('input', function () {
         Volume = this.value / 100;
+
+        for (var i = 0; i < AudioSources.length; i++) {
+            AudioSources[i].volume = Volume;
+        }
     });
 
-    var StoneBreakButton = document.getElementById('StoneBreak');
-    var WoodBreakButton = document.getElementById('WoodBreak');
-    var ZombieDeathButton = document.getElementById('ZombieDeath');
-    var SkeletonDeathButton = document.getElementById('SkeletonDeath');
+    var SoundCategoryWalk = document.getElementById("SoundCategoryWalk");
+    var SoundCategoryBlocks = document.getElementById("SoundCategoryBlocks");
+    var SoundCategoryMobs = document.getElementById("SoundCategoryMobs");
+    var SoundCategoryMisc = document.getElementById("SoundCategoryMisc");
 
-    StoneBreakButton.addEventListener('click', function () {
-        PlaySound('Sounds\\stone4.ogg');
+    var PlayButtonWalk = document.getElementById('PlayButtonWalk');
+    var PlayButtonBlocks = document.getElementById('PlayButtonBlocks');
+    var PlayButtonMobs = document.getElementById('PlayButtonMobs');
+    var PlayButtonMisc = document.getElementById('PlayButtonMisc');
+
+    PlayButtonWalk.addEventListener('click', function () {
+        PlaySound('Sounds\\' + SoundCategoryWalk.options[SoundCategoryWalk.selectedIndex].value + ".ogg");
     });
-
-    WoodBreakButton.addEventListener('click', function () {
-        PlaySound('Sounds\\wood4.ogg');
+    PlayButtonBlocks.addEventListener('click', function () {
+        PlaySound('Sounds\\' + SoundCategoryBlocks.options[SoundCategoryBlocks.selectedIndex].value + ".ogg");
     });
-
-    SkeletonDeath.addEventListener('click', function () {
-        PlaySound('Sounds\\SkeletonDeath.ogg');
+    PlayButtonMobs.addEventListener('click', function () {
+        PlaySound('Sounds\\' + SoundCategoryMobs.options[SoundCategoryMobs.selectedIndex].value + ".ogg");
     });
-
-    ZombieDeath.addEventListener('click', function () {
-        PlaySound('Sounds\\ZombieDeath.ogg');
+    PlayButtonMisc.addEventListener('click', function () {
+        PlaySound('Sounds\\' + SoundCategoryMisc.options[SoundCategoryMisc.selectedIndex].value + ".ogg");
     });
 
 
     function PlaySound(SoundFileName) {
-        const AudioSRC = new Audio(SoundFileName);
-        AudioSRC.volume = Volume;
-        AudioSRC.play();
+        for (var i = AudioSources.length - 1; i >= 0; i--) {
+            if (AudioSources[i].paused) {
+                AudioSources.splice(i, 1);
+            }
+        }
+
+        var AudioSRCAlternate = new Audio();
+        AudioSRCAlternate.src = SoundFileName;
+        AudioSRCAlternate.volume = Volume;
+        AudioSRCAlternate.play();
+        AudioSources.push(AudioSRCAlternate);
     }
 });
